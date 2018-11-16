@@ -55,7 +55,7 @@ CREATE VIEW top_authors AS
 ```
 ```python
 SELECT articles.author, sum(views) AS authors_views
-FROM aarticles, top_articles
+FROM articles, top_articles
 WHERE articles.title = top_articles.title
 GROUP BY articles.author
 ORDER BY authors_views DESC;

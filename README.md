@@ -51,9 +51,9 @@ CREATE VIEW top_articles AS
 SELECT title, views
 FROM articles, top_views
 WHERE slug = articles_path;
-CREATE VIEW top_authors AS
 ```
 ```python
+CREATE VIEW top_authors AS
 SELECT articles.author, sum(views) AS authors_views
 FROM articles, top_articles
 WHERE articles.title = top_articles.title

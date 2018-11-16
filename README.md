@@ -39,64 +39,46 @@ Once everything is installed: python Logs_Analysis.py
 
 ## Project's views
 
+```python
 CREATE VIEW top_views as AS
-
 SELECT substring(path, 10, 30) as articles_path, count(*) as views
-
 FROM log
-
 GROUP BY path
-
 ORDER BY views DESC;
-
+```
+```python
 CREATE VIEW top_articles AS
-
 SELECT title, views
-
 FROM articles, top_views
-
 WHERE slug = articles_path;
-
 CREATE VIEW top_authors AS
-
+```
+```python
 SELECT articles.author, sum(views) as authors_views
-
 FROM aarticles, top_articles
-
 WHERE articles.title = top_articles.title
-
 GROUP BY articles.author
-
 ORDER BY authors_views DESC;
-
+```
+```python
 CREATE VIEW daily_view AS
-
 SELECT date(time) as request_days, count(*) as views
-
 FROM log 
-
 GROUP BY request_days
-
 ORDER BY request_days DESC;
-
+```
+```python
 CREATE VIEW daily_error AS
-
 SELECT date(time) as request_days, count(*) as errors
-
 FROM log 
-
 WHERE status = '404 NOT FOUND'
-
 GROUP BY request_days 
-
 ORDER BY request_days DESC;
-
+```
+```python
 CREATE VIEW error_percentage AS
-
 SELECT select daily_view.request_days, (100.0*daily_error.errors/daily_view.views) AS percentage
-
 FROM daily_view, daily_error
-
 WHERE daily_view.request_days = daily_error.request_days
-
 ORDER BY percentage DESC;
+```

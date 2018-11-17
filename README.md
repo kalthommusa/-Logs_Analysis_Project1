@@ -77,7 +77,8 @@ ORDER BY request_days DESC;
 ```
 ```python
 CREATE VIEW error_percentage AS
-SELECT select daily_view.request_days, (100.0*daily_error.errors/daily_view.views) AS percentage
+SELECT select daily_view.request_days, 
+(100.0*daily_error.errors/daily_view.views) AS percentage
 FROM daily_view, daily_error
 WHERE daily_view.request_days = daily_error.request_days
 ORDER BY percentage DESC;
